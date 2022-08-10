@@ -315,10 +315,11 @@ class drawParticle:
         for objs in self.objs:
             state = objs.get_state()[:2]
             color = objs.get_color()
+            center = np.array([-30, -30])
 
             pg.draw.circle(self.Win, color, state, 10)
-            part_img = pg.image.load('ChapelStAsti.png')
-            self.Win.blit(part_img, state)
+            # part_img = pg.image.load('bub.png')
+            # self.Win.blit(part_img, state + center)
 
     def draw_data(self):
         pass

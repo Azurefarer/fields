@@ -1,3 +1,4 @@
+from tkinter import E
 import numpy as np
 import sympy as sp
 from scipy.integrate import odeint
@@ -5,26 +6,14 @@ import matplotlib.pyplot as plt
 import pygame as pg
 from abc import ABC, abstractmethod
 
-# force = 500
 
-# a =  np.array([0, 3])
-# b = np.array([3,5])
-# diff = b - a
-# phi = (np.arctan(diff[1]/diff[0])) + np.pi
 
-# accx = force * np.cos(phi)
-# accy = force * np.sin(phi)
+a = np.array([0, 5, 7])
+b = np.array([0, 0, 6])
+diffx, diffy = a[:2] - b[:2]
+d = np.linalg.norm((diffy, diffx))
 
-# print(phi)
-# print(accx)
-# print(accy)
+phi = np.rad2deg(np.arctan2(diffy, diffx))
+print(d)
+print(phi)
 
-a = [1, 2, 3, 4]
-b = [3, 2, 4, 1]
-
-h, i, j, k = a
-
-print(h)
-print(i)
-print(j)
-print(k)

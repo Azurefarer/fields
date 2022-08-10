@@ -16,7 +16,7 @@ class particle:
         self.color = color
 
     def set_state(self, s):
-
+        self.acceleration = []
         self.state = s
 
     def get_state(self):
@@ -33,9 +33,9 @@ class particle:
 
         return s_dot
 
-    def set_acc(self, force, phi):
-        self.acceleration = [force/self.mass * np.cos(phi), force/self.mass * np.sin(phi)]
-
+    def set_acc(self, force):
+        self.acceleration.append(force[0]/self.mass)
+        self.acceleration.append(force[1]/self.mass)
 
     def get_mass(self):
         return self.mass

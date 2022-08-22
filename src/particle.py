@@ -45,3 +45,6 @@ class particle:
 
     def get_state_size(self):
         return 4
+
+    def impulse(self):
+        pass

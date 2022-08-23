@@ -2,8 +2,9 @@ import numpy as np
 
 class particle:
 
-    def __init__(self, mass, x, y, v, color):
+    def __init__(self, mass, x, y, v, size, color):
 
+        self.size = size
         self.mass = mass
         self.x = x
         self.y = y
@@ -46,5 +47,8 @@ class particle:
     def get_state_size(self):
         return 4
 
+    def get_size(self):
+        return self.size
+        
     def impulse(self):
         pass

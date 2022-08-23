@@ -22,29 +22,33 @@ def main():
     clock = pg.time.Clock()
 
     #init objects, system, integrator, drawers, system drawer, and controller
-    a = particle(.1E14, 900, 550, [0, 16], GRAY)
-    b = particle(.01E14, 950, 500, [0, 0], GRAY)
-    c = particle(.01E14, 850, 500, [0, 0], GRAY)
-    d = particle(4E14, 700, 500, [0, 6], GRAY)
-    e = particle(4E14, 1100, 500, [0, -6], GRAY)
+    a = particle(1E14, 900, 500, [0, 0], 20, GRAY)
+    b = particle(.1E14, 1000, 500, [0, 5], 5, GRAY)
+    c = particle(.1E14, 800, 500, [0, -5], 5, GRAY)
+    d = particle(.1E14, 900, 400, [5, 0], 5, GRAY)
+    e = particle(.1E14, 900, 600, [-5, 0], 5, GRAY)
+    f = particle(.1E14, 1100, 500, [0, 3], 5, GRAY)
+    g = particle(.1E14, 700, 500, [0, -3], 5, GRAY)
+    h = particle(.1E14, 900, 300, [3, 0], 5, GRAY)
+    i = particle(.1E14, 900, 700, [-3, 0], 5, GRAY)
 
 
 
-    gravity = gf(a, b, c, d, e)
-    system = System(a, b, c, d, e)
+    gravity = gf(a, b, c, d, e, f, g, h, i)
+    system = System(a, b, c, d, e, f, g, h, i)
     
     rksystem = RK4(system)
 
-    draw = drawParticle(Win, a, b, c, d, e)
+    draw = drawParticle(Win, a, b, c, d, e, f, g, h, i)
     drawsystem = DrawSystem(draw)
 
-    ctrl = UIcontroller(a, b, c, d, e)
+    ctrl = UIcontroller(a, b, c, d, e, f, g, h, i)
 
 
     #frame rate and efficiency stuff
     counter = 0
-    dt = 1/100
-    max_count = 30
+    dt = 1/25
+    max_count = 5
 
     while run:
 

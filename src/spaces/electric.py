@@ -14,6 +14,14 @@ class electricField:
         self.size = size
         self.center = [900, 500]
 
+        self.psize = np.zeros(self.n)
+        for i in range(self.n):
+            self.psize[i] = np.random.randint(4, 7)
+
+        self.colors = []
+        for i in range(self.n):
+            self.colors.append([np.random.randint(150, 256), np.random.randint(150, 256), np.random.randint(150, 256)])
+
         self.states = np.zeros((self.n, 4))
         self.states0 = np.zeros((self.n, 4))
 
@@ -66,7 +74,6 @@ class electricField:
         s_dot = self.states_prime
         a = self.acceleration
         mag = self.mag
-        
 
         for i in range(self.n):
             randa = (np.random.rand()-.5)*mag, (np.random.rand()-.5)*mag
@@ -97,6 +104,7 @@ class electricField:
 
             for j in range(i + 1, n):    
                 particle2 = self.states[j]
+                collision_param = (self.psize[i] + self.psize[j])*SCALE/100000
                 diffx, diffy = particle2[:2] - particle1[:2]
 
                 d = np.linalg.norm((diffx, diffy))*SCALE/100000
@@ -104,6 +112,8 @@ class electricField:
 
                 forcex = -k * self.charges[i] * self.charges[j] / d**2 * np.cos(phi)
                 forcey = -k * self.charges[i] * self.charges[j] / d**2 * np.sin(phi)
+                if d <= collision_param:
+                    forcex, forcey = -forcex,  -forcey
                 forcesx[i][j], forcesx[j][i] = forcex, -forcex
                 forcesy[i][j], forcesy[j][i] = forcey , -forcey
 
@@ -193,6 +203,12 @@ class electricField:
 
     def get_particles(self):
         return self.n
+
+    def get_psizes(self):
+        return self.psize
+    
+    def get_colors(self):
+        return self.colors
 
     def get_mag(self):
         return self.mag

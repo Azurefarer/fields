@@ -21,6 +21,7 @@ class gravitationalField:
 
             for j in range(i + 1, len(obj)):    
                 particle2 = obj[j]
+                collision_param = obj[i].get_size() +  obj[j].get_size()
                 diffx, diffy = particle2.get_state()[:2] - particle1.get_state()[:2]
 
                 d = np.linalg.norm((diffx, diffy))
@@ -29,8 +30,13 @@ class gravitationalField:
 
                 forcex = G * particle1.get_mass() * particle2.get_mass() / d**2 * np.cos(phi)
                 forcey = G * particle1.get_mass() * particle2.get_mass() / d**2 * np.sin(phi)
+                if d <= collision_param:
+                    forcex, forcey = -forcex, -forcey
                 forcesx[i][j], forcesx[j][i] = forcex, -forcex
                 forcesy[i][j], forcesy[j][i] = forcey , -forcey
+
+
+
 
         forcextot = forcesx.sum(axis=1)
         forceytot = forcesy.sum(axis=1)
